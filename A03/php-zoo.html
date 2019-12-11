@@ -1,0 +1,202 @@
+<!--
+	FILE					: php-zoo.html
+	PROJECT				: PROG2001 - Wed Design and Development
+	PROGRAMMER		: Paul Smith & Amy Dayasundara
+	FIRST VERSION	: 2019-10-22
+	DESCRIPTION		: 
+		Purpose of this file is to set up the PHP html in
+		POST method and retireve customer input from the form.
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<link href= 'animalStyle.css' rel='stylesheet' type='text/css'>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--The styles contain the edits for the background of the title, the dynamically changing colour
+		in the background and Sam Rockwell dancing at the footer-->
+		
+		<!-- Javascript -->
+		<title>Animal House</title>
+		<script type="text/javascript">
+        //	FUNCTION		:	validateName
+        //	DESCRIPTION	:	
+        //		This function validates the contents of the Name field
+        //		on the registration form.
+        //	PARAMETERS	:
+        //		None
+        //	RETURNS			:
+        //		true	:	if user input is valid
+        //		false	:	if user input is invalid 
+        function validateName() 
+		{
+            //regEx for the validation of names. Allows for first and last name combos only
+            var regEx = /^[A-Z]([a-z]+)/
+            var name = "";
+            var retCode = false;
+            document.getElementById("badName").innerHTML = "";	//error message reset
+
+            name = document.getElementById("nameField").value;		//name value stored into variable
+
+            if (regEx.test(name))		//return code set to true if regEx succesful
+            {
+								document.TheZoo.secretName.value = name;
+                retCode = true;
+            }
+            else							//set to false if regEx fails
+            {
+                retCode = false;			//error message set
+                document.getElementById("badName").innerHTML = "Invalid name entry";
+            }
+            return retCode;
+        };
+
+        //	FUNCTION		:	validateAnimal
+        //	DESCRIPTION	:	
+        //		This function validates the contents of the Province/Territory 
+        //		drop-down list on the registration form.
+        //	PARAMETERS	:
+        //		None
+        //	RETURNS			:
+        //		true	:	if user selects an animal
+        //		false	:	if user does not make selection 	
+        function validateAnimal() 
+		{
+            retCode = false;
+            var animalSelection = "";
+            document.getElementById("badAnimal").innerHTML = "";	//error message reset
+
+            animalSelection = document.getElementById("animalField").value;	//animal value stored
+
+            if (animalSelection != "0")				//checks to see if value is not default
+            {
+				document.TheZoo.secretAnimal.value = animalSelection;
+                retCode = true;					//if not default value returns true
+            }
+            else if (animalSelection == "0")	//if default value returns false
+            {
+                retCode = false;				//error message set
+                document.getElementById("badAnimal").innerHTML = "Must select an animal";
+            }
+            return retCode;
+        }
+
+        //	FUNCTION		:	runValidation
+        //	DESCRIPTION	:	
+        //		This function runs the various input validating functions throughout
+        //		the form, ensuring no errors are detected before submission.
+        //	PARAMETERS	:
+        //		None
+        //	RETURNS			:
+        //		true	:	if no functions return false
+        //		false	:	if any function returns false
+        function runValidation() 
+		{
+            var counter = 0;
+            var validArray = [];
+            var retCode = false;
+            validArray[0] = validateName();					//functions are run and results stored into
+            validArray[1] = validateAnimal();			    //array for use
+
+            for (counter = 0; counter < validArray.length; counter++)	//results of validation functions are checked
+            {
+                if (validArray[counter] != true)											//if any function returns false error message is set
+                {																											//and function ends
+                    document.getElementById("warning").innerHTML = "Please fix errors before submitting";
+                    retCode = false;
+                    break;
+                }
+                else {
+                    retCode = true;		//returns true if no functions encounter errors
+                }
+            }
+            return retCode;
+        }        
+		</script>
+	</head>
+	
+	<!-- Form for the animals php -->
+	<body>
+	    <form name="TheZoo" action="animals.php" method="POST" onsubmit="return runValidation();">
+			<div class="row">
+				<div class="column">
+				
+				</div>
+				<div class="column">
+
+					<h2 align="center"><p id="rcorners1">The Zoo</p></h2>
+				
+					<tr>
+						<td colspan="2">This is a page for connecting you to animal pictures.</td>
+					</tr>
+					<tr><td><br /></td></tr>
+					<tr><td><br /></td></tr>
+					<tr>
+						<td colspan="2">Please fill out the following form accurately. When finished, please click the <b><i>Register</i></b> button.</td>
+					</tr>
+					<tr><td><br /></td></tr>
+					<tr><td><br /></td></tr>
+					<!-- bulk of questions and fields stored in table for ease of presentation -->
+					<tr>
+						<td width="40%"><b>Name:</b></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+						<td width="50%">
+							<input type="text" size="15" name="name" id="nameField"/>
+						</td>
+						<td><input type="hidden" size="15" name="secretName"/></td>
+					</tr>
+					<tr>
+						<!-- "Consistency" words present to prevent form shifting should error message be printed. -->
+						<!-- Opacity set to 0 so it never shows. -->
+						<td><font size="2" style="opacity: 0;"><i>Consistency</i></font></td>
+						<td><font size="2"><div id = "badName" style="color:white;"></div></font></td>
+					</tr>
+					<!-- codes condensed into single line for ease of code readability. Serves as newline for table. -->
+					<tr><td><br /></td></tr>			
+					<tr>
+						<td><b>Animal:</b></td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>
+							<select name="animal" id="animalField">
+								<option value="0">---Select Animal---</option>
+								<option value="AO">Armadillo</option>
+								<option value="DN">Dolphin</option>
+								<option value="MO">Moth</option>
+								<option value="QU">Quokka</option>
+								<option value="SR">Sam Rockwell</option>
+								<option value="TR">Tiger</option> 						
+							</select>
+						</td>
+						<td><input type="hidden" size="15" name="secretAnimal"/></td>
+					</tr>
+					<tr>
+						<td><font size="2" style="opacity: 0;"><i>Consistency</i></font></td>
+						<td><font size="2"><div id = "badAnimal" style="color:white;"></div></font></td>
+					</tr>
+					<tr><td><br /></td></tr>
+				
+					<br />
+					<tr>
+						<!-- Wanring message should users miss the other bright red error messages -->
+						<td colspan="2" align="center"><div id ="warning" style="color:white;"></div></td>
+					</tr>
+					<tr>
+						<td align="center"><input type="submit" id="register" value="Register"></td>
+					</tr>
+				</div>
+				
+				<div class="column">
+				
+				</div>
+			</div>
+				
+			<div class="footer">
+				<sammy id="rockwell"><img src="./samRockwellDance.jpg" /></sammy>
+			</div>
+
+		</form>
+	</body>
+</html>
+	

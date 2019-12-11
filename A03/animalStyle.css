@@ -1,0 +1,112 @@
+/* 
+* FILE						: cgi-zoo.html 
+*	PROJECT					: PROG2001 - Wed Design and Development 
+* PROGRAMMER			: Paul Smith & Amy Dayasundara 
+* FIRST VERSION		: 2019-10-22 
+* DESCRIPTION			: Purpose of this file is to set up the CSS elements 
+* 									shared between the forms.
+*/
+
+
+/* The styles contain the edits for the background of the title, the dynamically changing colour */
+/* in the background and Sam Rockwell dancing at the footer */
+
+* {
+		box-sizing: border-box;
+	}
+
+body 
+	{
+		margin: 0;
+		background-color: green;
+		animation-name: funRegistration;
+		animation-duration: 10s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+	}
+#rcorners1 
+	{
+		border-radius: 25px;
+		background: #FFA500;
+		padding: 20px;
+		width: 300px;
+	}
+			
+/* Create three equal columns that floats next to each other */
+.column 
+	{
+		float: left;
+		width: 33.33%;
+		padding: 15px;
+	}
+
+/* Clear floats after the columns */
+.row:after 
+	{
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) 
+	{
+		.column 
+		{
+		width: 100%;
+		}
+	}
+div 
+	{
+		background-color: green;
+		animation-name: funRegistration;
+		animation-duration: 10s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+	}
+
+/* Standard syntax */
+@keyframes funRegistration 
+	{
+		from {background-color: teal;}
+		to {background-color: green;}
+	}
+.footer
+	{
+		text-align:left;
+	}
+@keyframes move
+	{
+		from
+			{
+			left: 10;
+			transform: rotate(0deg);
+			}
+		to
+			{
+			left: 85%;
+			transform: rotate(360deg);
+			}
+	}
+/*Animation to make Sam Rockwell dance*/
+sammy
+	{
+		animation-name: move;
+		text-decoration: none;
+		padding-left: 20px;
+		padding-right: 20px;
+		left: 0;
+		position: absolute;
+		animation: move 10s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		opacity: 0.02;
+	}
+
+/*sets restrictions on max height and width*/
+img
+	{
+		max-width: 400px;
+		max-height: 400px;
+	}
+

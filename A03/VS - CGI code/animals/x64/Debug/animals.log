@@ -1,0 +1,4 @@
+﻿  animals.cpp
+C:\localWebSite\A03\VS - CGI code\animals\animals.cpp(110,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\localWebSite\A03\VS - CGI code\animals\animals.cpp(137,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  animals.vcxproj -> C:\localWebSite\A03\VS - CGI code\x64\Debug\animals.exe
